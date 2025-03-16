@@ -50,9 +50,12 @@ module Matches =
                     parse (addError $"Unrecognized argument: '{token}'" matches) (Array.tail args)
 
                 | Some arg -> 
+                    // Consume 2 tokens 
                     if takesArgument arg then 
                         makeMatchWithArg arg args
                         |> next matches args[1..]
+
+                    // Consume one token 
                     else 
                         makeMatchWithArg arg args
                         |> next matches args[2..]
