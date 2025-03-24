@@ -26,4 +26,6 @@ module Parser =
 
     let addArg arg parser = { parser with args = arg :: parser.args }
 
+    let getShort arg parser = List.tryFind (fun short -> Option.contains arg short.short) parser.args
+    let getLong arg parser = List.tryFind (fun long -> Option.contains arg long.long) parser.args
 

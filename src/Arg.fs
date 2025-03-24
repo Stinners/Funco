@@ -7,6 +7,7 @@ module Arg =
         = String 
         | Int 
         | Float 
+        | NoArg 
 
     // Determines what to do when am arg is parsed 
     type Action 
@@ -17,7 +18,7 @@ module Arg =
 
     type Arg = 
         { name: string 
-          short: string option 
+          short: char option 
           long: string option 
           help: string option 
           valType: ValueType
@@ -48,7 +49,11 @@ module Arg =
 
     // =============== Metadata Functions ===============================================
 
-    let takesArgument arg = 
-        match arg.action with 
-        | SetTrue | Count -> false 
-        | _               -> true 
+    let takesParameter arg = 
+        if List.contains arg.action [SetTrue; Count] then 
+            false 
+        elif arg.action = SetTrue then 
+            false 
+        else 
+            true 
+
