@@ -1,19 +1,25 @@
 namespace Funco 
 
-open Arg
+open ArgSpec
 
 module ArgMatch = 
 
+    type MatchValue = 
+        | Unvalidated of string
+        | Str of string 
+        | Int of int 
+        | Float of float 
+        | Bool of bool 
+        | NoValue
+
     type ArgMatch = 
         { name: string 
-          valueStr: string 
-          isValidated: bool
+          value: MatchValue 
           expectedType: ValueType
         }
 
-    let initMatch (arg: Arg) value = 
+    let initMatch (arg: ArgSpec) value = 
         { name = arg.name 
-          valueStr = value
-          isValidated = false 
+          value = Unvalidated value
           expectedType = arg.valType
         }

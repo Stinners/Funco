@@ -1,12 +1,13 @@
 namespace Funco 
 
-module Arg = 
+module ArgSpec = 
 
     // Used to validate the type when creating an ArgMatch
     type ValueType 
         = String 
         | Int 
         | Float 
+        | Bool
         | NoArg 
 
     // Determines what to do when am arg is parsed 
@@ -16,7 +17,7 @@ module Arg =
         | SetTrue 
         | Count 
 
-    type Arg = 
+    type ArgSpec = 
         { name: string 
           short: char option 
           long: string option 
@@ -40,8 +41,10 @@ module Arg =
 
     // TODO tidy up dashes in from of long and short 
 
-    let short name arg = { arg with short = Some name }
-    let long name arg = { arg with long = Some name }
+    let private trim (name: string) = name.Trim [|'-'; ' '|]
+
+    let short character arg = { arg with short = Some character }
+    let long name arg = { arg with long = Some (trim name) }
     let help text arg = { arg with help = Some text }
     let valueType valueType arg = { arg with valType = valueType }
     let action act arg = { arg with action = act }

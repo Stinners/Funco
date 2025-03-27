@@ -9,7 +9,6 @@
   <ItemGroup>
     <Compile Include="src/Arg.fs" />
     <Compile Include="src/ArgMatch.fs" />
-    <Compile Include="src/ParseLib.fs" />
     <Compile Include="src/Parser.fs" />
     <Compile Include="src/Matches.fs" />
     <Compile Include="src/Library.fs" />

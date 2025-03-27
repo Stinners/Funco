@@ -1,6 +1,6 @@
 namespace Funco 
 
-open Arg
+open ArgSpec
 
 module Parser = 
 
@@ -8,7 +8,7 @@ module Parser =
         { name: string
           about: string option
           version: string option 
-          args: Arg list
+          args: ArgSpec list
         }
 
     let parser name = 
@@ -29,3 +29,4 @@ module Parser =
     let getShort arg parser = List.tryFind (fun short -> Option.contains arg short.short) parser.args
     let getLong arg parser = List.tryFind (fun long -> Option.contains arg long.long) parser.args
 
+    // ============================================================
